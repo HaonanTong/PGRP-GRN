@@ -1,4 +1,4 @@
-function [ fig, ngene, expr, agis ] = ...
+function [ fig, ngene, expr,plotData, agis, agis_new ] = ...
     f_plotTable( csv, transfile, varargin )
 % [ fig, ngene, expr, agis ] = plotTable( csv, isVariableNames )
 % fig - figure of profiles in csv file
@@ -81,6 +81,11 @@ for i = 2:7
 end
 plotData = tmp;
 plotData = [ zeros(size(plotData,1),1) plotData ];
+
+if nargin == 2
+    fig = [];
+    return
+end
 
 %% Plot
 fprintf(' Preparing for plotting...\n')
