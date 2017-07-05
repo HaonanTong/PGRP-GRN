@@ -36,6 +36,9 @@ if nargin < 2
     return;
 end
 
+csv_token = strtok(csv,'.');
+mkdir('Figures');
+
 % fig = cell(nargin-2);
 counter = 0;
 
@@ -101,12 +104,15 @@ if any(strcmp(varargin,'Mean Plot'))
     plot(x,mean( plotData),'Color','r','LineWidth',4);
     xticks(0:6)
     xticklabels({'0','0.25','0.5','1','4','12','24'})
-    title(sprintf( 'plot of expression file\n "%s"', csv))
+    title(sprintf...
+        ( 'plot of expression file\n "%s" with %d genes"',...
+        csv, ngene))
     xlabel('Ethylene treatment(hrs)');
     ylabel('Expression-log2ratio(reference at 0 hrs)');
     set(gca,'fontsize',14);
     
-    print(fig{counter},'./Figures/Mean-Plot','-dpng');
+
+    print(fig{counter},sprintf('./Figures/%s-Mean-Plot',csv_token),'-dpng');
 
 end
 
